@@ -1,5 +1,12 @@
 # 9. Roadmap, open problems, and risks
 
+> **Build status (v0.1):** the Phase 0 evaluation harness (synthetic songs + mir_eval) is in place.
+> The Phase 1 baseline cascade is done, with model-free fallbacks for every stage plus
+> Demucs/RoFormer/Basic Pitch/CREPE/Beat This! adapters. The core of Phase 3 is done: harmony voices
+> grouped by interval to the lead, harmony labels, doubling detection, and a melody track. The
+> Demucs/RoFormer adapters still need to be run against real downloaded weights. See the top-level
+> README for current numbers.
+
 ## 9.1 Phased build plan
 
 ### Phase 0: Evaluation first (1–2 weeks)

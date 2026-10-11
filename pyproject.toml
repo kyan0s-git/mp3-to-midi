@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mp3-to-midi"
+version = "0.1.0"
+description = "Transcribe full songs (vocals, harmonies, melody, bass, drums, everything else) into multi-track MIDI."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "librosa>=0.10",
+    "soundfile>=0.12",
+    "mido>=1.3",
+]
+
+[project.optional-dependencies]
+# Polyphonic note transcription (Apache-2.0). On Python 3.13 install with
+#   pip install --no-deps basic-pitch && pip install onnxruntime pretty_midi resampy mir_eval
+basic-pitch = ["basic-pitch", "onnxruntime"]
+# Neural source separation (MIT). Downloads weights on first use.
+demucs = ["demucs>=4.0", "torch"]
+# RoFormer / MDX / karaoke models via python-audio-separator (check each model's license).
+roformer = ["audio-separator"]
+# Neural f0 tracking (MIT). Weights ship inside the package.
+crepe = ["torchcrepe", "torch"]
+# Beat/downbeat tracking (MIT). Downloads weights on first use.
+beat-this = ["beat-this", "torch"]
+eval = ["mir_eval>=0.7"]
+dev = ["pytest>=7", "mir_eval>=0.7"]
+
+[project.scripts]
+mp3-to-midi = "mp3_to_midi.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
